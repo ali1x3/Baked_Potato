@@ -13,3 +13,7 @@ config_version=5
 config/name="BakedPotato"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-vim-56c360eee7fa84ff67bff5df815a7ed8383bd354/addons/godot-vim/plugin.cfg")
