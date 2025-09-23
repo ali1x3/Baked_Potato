@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 # constants
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -500.0
 const COYOTE_TIME = 0.10 # grace period that you can perform a normal jump after a ledge
 const BUFFER_TIME = 0.10
+const FRICTION = 100.0
 
 # booleans
 var DOUBLE_JUMPED = false
@@ -37,11 +38,10 @@ func _physics_process(delta: float) -> void:
 	
 	if not taking_action:
 		run_listener()
-		attack_listener()
-	
+		attack_listener(delta)
+		jump_listener()
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	jump_listener()
 	move_and_slide()
 
 func jump_listener() -> void:
@@ -67,12 +67,14 @@ func run_listener() -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		animations.play("idle")
 
-func attack_listener() -> void:
+func attack_listener(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		is_attacking = true
-		gravity_vector *= 0.5
-		velocity.y *= 0.2
-		velocity.x *= 0.4
+		gravity_vector *= 0.03
+		velocity.y = 0
+		velocity.x *= 0.05
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		
 		attack_string_handler()
 		animations.animation_finished.connect(attack_finished)
 
