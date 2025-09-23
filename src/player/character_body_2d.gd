@@ -8,9 +8,6 @@ const BUFFER_TIME = 0.10
 
 # booleans
 var double_jumped = false
-var is_attacking = false
-var is_dodging = false
-
 
 var attack_string = 0
 var current_speed = SPEED
@@ -45,10 +42,9 @@ func _physics_process(delta: float) -> void:
 
 func animation_finished():
 	var animation = animations.animation
-	if is_attacking:
-		is_attacking = false
 	if animation == "dodge":
 		reset_dodge()
+	state = PlayerState.IDLE
 
 func handle_timers_helpers(delta: float):
 	if is_on_floor():
@@ -60,8 +56,7 @@ func handle_timers_helpers(delta: float):
 func handle_inputs():
 	jump_listener()
 	run_listener()
-	if not is_attacking:
-		attack_listener()
+	attack_listener()
 	dodge_listener()
 
 func handle_state():
@@ -84,7 +79,6 @@ func animation_update() -> void:
 	match state:
 		PlayerState.DODGE:
 			print("dodge")
-			is_dodging = true
 			animations.play("dodge")
 			return
 		PlayerState.ATTACK:
@@ -92,14 +86,16 @@ func animation_update() -> void:
 			attack_listener()
 			return
 			
-	if is_attacking or is_dodging:
-		return
+	
+	if animations.animation in ["attack_string1", "attack_string2", "attack_string3", "dodge"]:
+		if animations.is_playing():
+			return
+	
 	match state:
 		PlayerState.IDLE:
 			animations.play("idle")
 		PlayerState.GROUND_MOVE:
 			animations.play("run")
-			print("run")
 		PlayerState.AIR:
 			# falling animation here
 			pass
@@ -109,7 +105,8 @@ func dodge_listener() -> void:
 	if Input.is_action_just_pressed("dodge"):
 		current_speed *= dodge_multiplier
 		state = PlayerState.DODGE
-	
+
+
 func jump_listener() -> void:
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or coyote_timer > 0.0:
@@ -129,18 +126,14 @@ func run_listener() -> void:
 			animations.flip_h = true
 		else:
 			animations.flip_h = false
-		if not is_attacking:
-			state = PlayerState.GROUND_MOVE
+		state = PlayerState.GROUND_MOVE
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
-		if not is_attacking or is_dodging:
-			state = PlayerState.IDLE
+		state = PlayerState.IDLE
 
 
 func attack_listener() -> void:
 	if Input.is_action_just_pressed("attack"):
-		is_attacking = true
-		attack_string = (attack_string + 1) % 3
 		reset_dodge()
 		attack_string_handler()
 
@@ -155,8 +148,9 @@ func attack_string_handler() -> void:
 	elif attack_string == 2:
 		animations.play("attack_string3")
 		print("attack string 3")
+	attack_string = (attack_string + 1) % 3
+
 
 func reset_dodge():
-	is_dodging = false
 	current_speed = SPEED
 	state = PlayerState.IDLE
