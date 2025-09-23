@@ -1,12 +1,21 @@
 extends CharacterBody2D
 
-
+# constants
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const COYOTE_TIME = 0.10 # grace period that you can perform a normal jump after a ledge
+const BUFFER_TIME = 0.10
+
+# booleans
 var DOUBLE_JUMPED = false
 var is_attacking = false
+var attack_string = 0
+
+# timers
 var coyote_timer = COYOTE_TIME
+var buffer_timer = BUFFER_TIME
+
+# gravity
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity_vector = Vector2(0.0, 980.0)
 @onready var animations: AnimatedSprite2D = $animations
@@ -15,7 +24,10 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		coyote_timer -= delta
-		velocity += gravity_vector * delta
+		if velocity.y > 0:
+			velocity += gravity_vector * delta
+		else :
+			velocity += gravity_vector * 1.3 * delta
 	else:
 		coyote_timer = COYOTE_TIME
 		DOUBLE_JUMPED = false
@@ -39,6 +51,8 @@ func jump_listener() -> void:
 		elif not DOUBLE_JUMPED:
 			velocity.y = JUMP_VELOCITY
 			DOUBLE_JUMPED = true
+	if Input.is_action_just_released("jump"):
+		velocity.y *= 0.3
 
 func run_listener() -> void:
 	var direction := Input.get_axis("move_left", "move_right")
@@ -59,9 +73,27 @@ func attack_listener() -> void:
 		gravity_vector *= 0.5
 		velocity.y *= 0.2
 		velocity.x *= 0.4
-		animations.play("attack")
+		attack_string_handler()
 		animations.animation_finished.connect(attack_finished)
+
+
+func attack_string_handler() -> void:
+	if attack_string == 0:
+		animations.play("attack_string1")
+		print("attack string 1")
+		attack_string += 1
+	elif attack_string == 1:
+		animations.play("attack_string2")
+		print("attack string 2")
+		attack_string += 1
+	elif attack_string == 2:
+		animations.play("attack_string3")
+		print("attack string 3")
+		attack_string = 0
+
+
 
 func attack_finished() -> void:
 	is_attacking = false
 	gravity_vector = get_gravity()
+	
