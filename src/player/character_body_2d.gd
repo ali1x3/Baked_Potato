@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var player_stats : PlayerStats
 # constants
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
@@ -21,7 +22,7 @@ var buffer_timer = BUFFER_TIME
 # gravity
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity_vector = Vector2(0.0, gravity)
-@onready var animations: AnimatedSprite2D = $animations
+@export var animations: AnimatedSprite2D
 
 # player state
 enum PlayerState { ATTACK, DODGE, GROUND_MOVE, AIR, IDLE }
@@ -33,9 +34,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	handle_timers_helpers(delta)
-	handle_inputs()
-	animation_update()
+	if velocity.x > 0:
+		transform.x = Vector2(1.0, 0.0)
+	elif velocity.x < 0:
+		transform.x = Vector2(-1.0, 0.0)
+		
 	apply_physics(delta)
 	move_and_slide()
 
@@ -54,8 +57,6 @@ func handle_timers_helpers(delta: float):
 		coyote_timer -= delta
 
 func handle_inputs():
-	jump_listener()
-	run_listener()
 	attack_listener()
 	dodge_listener()
 
@@ -108,31 +109,6 @@ func dodge_listener() -> void:
 	if Input.is_action_just_pressed("dodge"):
 		current_speed *= dodge_multiplier
 		state = PlayerState.DODGE
-
-
-func jump_listener() -> void:
-	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() or coyote_timer > 0.0:
-			velocity.y = JUMP_VELOCITY
-		elif not double_jumped:
-			velocity.y = JUMP_VELOCITY
-			double_jumped = true
-	if Input.is_action_just_released("jump"):
-		velocity.y *= 0.3
-
-
-func run_listener() -> void:
-	var direction := Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * current_speed
-		if direction < 0:
-			animations.flip_h = true
-		else:
-			animations.flip_h = false
-		state = PlayerState.GROUND_MOVE
-	else:
-		velocity.x = move_toward(velocity.x, 0, current_speed)
-		state = PlayerState.IDLE
 
 
 func attack_listener() -> void:
