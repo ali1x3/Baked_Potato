@@ -68,6 +68,9 @@ func handle_state_effects():
 
 
 func apply_physics(delta: float):
+	if animations.animation == "dodge":
+		velocity.y = 0
+		return
 	if not is_on_floor():
 		if velocity.y > 0:
 			velocity += gravity_vector * delta
