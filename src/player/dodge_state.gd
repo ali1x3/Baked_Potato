@@ -2,6 +2,11 @@ extends CharacterState
 
 func _enter() -> void:
 	super()
+	if character.is_on_floor():
+		agent.animations.play("dodge")
+	else :
+		agent.animations.play("airdodge")
+	
 	blackboard.set_var(BlackboardNames.allow_dodge_var, false)
 	player_stats.dodge_cooldown_timer = player_stats.DODGE_COOLDOWN
 	var direction : Vector2 = blackboard.get_var(BlackboardNames.direction_var)

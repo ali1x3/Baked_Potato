@@ -16,7 +16,7 @@ func _update(delta: float) -> void:
 	player_stats.coyote_timer -= delta
 	player_stats.dodge_cooldown_timer -= delta
 	if player_stats.dodge_cooldown_timer <= 0:
-		player_stats.dodge_cooldown_timer = 0
+		player_stats.dodge_cooldown_timer = 0 # this is here for display purposes
 		blackboard.set_var(BlackboardNames.allow_dodge_var, true)
 		
 	apply_physics(delta)
@@ -28,7 +28,7 @@ func jump():
 	print("jumped")
 
 func apply_physics(delta: float):
-	if character.animations.animation == "dodge":
+	if character.animations.animation in ["dodge", "airdodge"]:
 		character.velocity.y = 0
 		return
 	if not character.is_on_floor():
