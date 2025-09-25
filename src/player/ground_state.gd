@@ -7,7 +7,8 @@ func _enter() -> void:
 	player_stats.jumped = false
 	blackboard.set_var(BlackboardNames.allow_jump_var, true)
 
-func _update(_delta: float) -> void:
+func _update(delta: float) -> void:
+	super(delta)
 	if character.is_on_floor():
 		player_stats.coyote_timer = player_stats.COYOTE_TIME
 
@@ -20,6 +21,10 @@ func _update(_delta: float) -> void:
 	
 	if not character.is_on_floor():
 		dispatch("midair")
+	
+	if blackboard.get_var(BlackboardNames.dodge_var) && blackboard.get_var(BlackboardNames.allow_dodge_var):
+		dispatch("dodge")
+		
 		
 	if blackboard.get_var(BlackboardNames.jump_var) && blackboard.get_var(BlackboardNames.allow_jump_var, true):
 		if character.is_on_floor(): 

@@ -12,9 +12,26 @@ func _enter() -> void:
 	agent.animations.play(animation_name)
 
 
-func _physics_process(delta: float) -> void:
+func _update(delta: float) -> void:
 	player_stats.coyote_timer -= delta
-	
+	player_stats.dodge_cooldown_timer -= delta
+	if player_stats.dodge_cooldown_timer <= 0:
+		blackboard.set_var(BlackboardNames.allow_dodge_var, true)
+		
+	apply_physics(delta)
+	character.move_and_slide()
+
+
 func jump():
 	character.velocity.y = player_stats.jump_speed
 	print("jumped")
+
+func apply_physics(delta: float):
+	if character.animations.animation == "dodge":
+		character.velocity.y = 0
+		return
+	if not character.is_on_floor():
+		if character.velocity.y > 0:
+			character.velocity += player_stats.gravity_vector * delta
+		else:
+			character.velocity += player_stats.gravity_vector * 1.5 * delta

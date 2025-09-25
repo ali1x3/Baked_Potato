@@ -2,9 +2,13 @@ extends CharacterState
 
 
 func _update(delta: float) -> void:
-	var velocity : Vector2 = air_move()
+	super(delta)
+	var _velocity : Vector2 = air_move()
 	if character.is_on_floor():
 		dispatch("land")
+	
+	if blackboard.get_var(BlackboardNames.dodge_var) && blackboard.get_var(BlackboardNames.allow_dodge_var, true):
+		dispatch("airdodge")
 	
 	if blackboard.get_var(BlackboardNames.jump_var) && blackboard.get_var(BlackboardNames.allow_jump_var, true):
 		if character.is_on_floor(): 
