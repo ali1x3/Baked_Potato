@@ -1,5 +1,9 @@
 extends Label
 
+@export var character : CharacterBody2D
+var state : String = " "
+var velocity : String
+# this just shows what the current state of the character is in text
 @export var limbo_hsm : LimboHSM :
 	set(value):
 		if limbo_hsm != null:
@@ -14,4 +18,8 @@ extends Label
 			limbo_hsm.active_state_changed.connect(_on_active_state_changed)
 
 func _on_active_state_changed(current: LimboState, _previous : LimboState):
-	text = current.name
+	state = current.name
+
+func _process(delta: float) -> void:
+	velocity = str(character.velocity)
+	text = velocity + "\n" + state

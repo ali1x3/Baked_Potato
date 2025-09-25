@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://crtbosayd0ido"]
+[gd_scene load_steps=72 format=3 uid="uid://crtbosayd0ido"]
 
 [ext_resource type="Texture2D" uid="uid://csj1skvdlo3r6" path="res://assets/FREE_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://el0wou5yw684" path="res://src/player/character_body_2d.gd" id="1_g2els"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bsq3gfbucfkqs" path="res://src/player/air_state.gd" id="10_jej6c"]
 [ext_resource type="Script" uid="uid://caqv4ogrq1rdi" path="res://src/player/player_input.gd" id="11_3v2ag"]
 [ext_resource type="Resource" uid="uid://dmuaku51cgw3b" path="res://src/player/player_actions.tres" id="12_3v2ag"]
+[ext_resource type="Script" uid="uid://dv76pgexdyit" path="res://src/player/facing.gd" id="12_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://bq7bh24t1fbxl" path="res://assets/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUNblank.png" id="13_a8ls1"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_3v2ag"]
@@ -500,7 +501,7 @@ height = 24.0
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animations")]
 script = ExtResource("1_g2els")
 player_stats = ExtResource("2_jej6c")
-animations = NodePath("animations")
+animations = NodePath("facing/animations")
 
 [node name="LimboHSM" type="LimboHSM" parent="CharacterBody2D" node_paths=PackedStringArray("character", "states")]
 blackboard_plan = SubResource("BlackboardPlan_3v2ag")
@@ -531,20 +532,29 @@ metadata/_custom_type_script = "uid://bjlnuurd587jy"
 script = ExtResource("7_oprun")
 metadata/_custom_type_script = "uid://bjlnuurd587jy"
 
-[node name="StateLabel" type="Label" parent="CharacterBody2D" node_paths=PackedStringArray("limbo_hsm")]
-offset_left = -25.0
-offset_top = -61.0
-offset_right = 15.0
-offset_bottom = -38.0
-script = ExtResource("9_ur7pv")
-limbo_hsm = NodePath("../LimboHSM")
-
 [node name="PlayerInput" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("limbo_hsm")]
 script = ExtResource("11_3v2ag")
 player_actions = ExtResource("12_3v2ag")
 limbo_hsm = NodePath("../LimboHSM")
 
-[node name="animations" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+zoom = Vector2(1.5, 1.5)
+script = ExtResource("5_qlg0r")
+
+[node name="StateLabel" type="Label" parent="CharacterBody2D" node_paths=PackedStringArray("character", "limbo_hsm")]
+offset_left = -34.0
+offset_top = -103.0
+offset_right = 34.0
+offset_bottom = -62.0
+script = ExtResource("9_ur7pv")
+character = NodePath("..")
+limbo_hsm = NodePath("../LimboHSM")
+
+[node name="facing" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("character")]
+script = ExtResource("12_qfm1y")
+character = NodePath("..")
+
+[node name="animations" type="AnimatedSprite2D" parent="CharacterBody2D/facing"]
 position = Vector2(-1, -34)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"dodge"
@@ -553,7 +563,3 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_fjrip")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-zoom = Vector2(1.5, 1.5)
-script = ExtResource("5_qlg0r")

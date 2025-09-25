@@ -22,10 +22,11 @@ func _update(delta: float) -> void:
 	if not character.is_on_floor():
 		dispatch("midair")
 	
+	# reading from the blackboard if a dodge input was detected, and if the character is allowed to dodge
 	if blackboard.get_var(BlackboardNames.dodge_var) && blackboard.get_var(BlackboardNames.allow_dodge_var):
 		dispatch("dodge")
 		
-		
+	# same thing as above but for jump
 	if blackboard.get_var(BlackboardNames.jump_var) && blackboard.get_var(BlackboardNames.allow_jump_var, true):
 		if character.is_on_floor(): 
 			jump()

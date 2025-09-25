@@ -7,9 +7,11 @@ func _update(delta: float) -> void:
 	if character.is_on_floor():
 		dispatch("land")
 	
+	# reading from the blackboard if a dodge input was detected, and if the character is allowed to dodge
 	if blackboard.get_var(BlackboardNames.dodge_var) && blackboard.get_var(BlackboardNames.allow_dodge_var, true):
 		dispatch("airdodge")
 	
+	# same thing as above but for coyote and double jump
 	if blackboard.get_var(BlackboardNames.jump_var) && blackboard.get_var(BlackboardNames.allow_jump_var, true):
 		if character.is_on_floor(): 
 			jump()
@@ -25,11 +27,11 @@ func _update(delta: float) -> void:
 		elif not player_stats.double_jumped:
 			jump()
 			player_stats.double_jumped = true
-# Called when the node enters the scene tree for the first time.
 
 func air_move() -> Vector2:
 	var direction : Vector2 = blackboard.get_var(BlackboardNames.direction_var)
 	
+	# this gives the illusion of air friction
 	if direction.x > 0:
 		var attempeted_velocity_x = min(
 			player_stats.max_air_speed,
