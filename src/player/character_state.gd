@@ -16,6 +16,7 @@ func _update(delta: float) -> void:
 	player_stats.coyote_timer -= delta
 	player_stats.dodge_cooldown_timer -= delta
 	if player_stats.dodge_cooldown_timer <= 0:
+		player_stats.dodge_cooldown_timer = 0
 		blackboard.set_var(BlackboardNames.allow_dodge_var, true)
 		
 	apply_physics(delta)

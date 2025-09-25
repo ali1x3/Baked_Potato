@@ -3,6 +3,7 @@ extends Label
 @export var character : CharacterBody2D
 var state : String = " "
 var velocity : String
+var dodge_cd : String
 # this just shows what the current state of the character is in text
 @export var limbo_hsm : LimboHSM :
 	set(value):
@@ -22,4 +23,5 @@ func _on_active_state_changed(current: LimboState, _previous : LimboState):
 
 func _process(delta: float) -> void:
 	velocity = str(character.velocity)
-	text = velocity + "\n" + state
+	dodge_cd = str("%.2f" % limbo_hsm.agent.player_stats.dodge_cooldown_timer)
+	text = velocity + "\n" + dodge_cd + "\n" + state
