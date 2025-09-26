@@ -1,8 +1,10 @@
 extends CharacterState
 
+var direction : Vector2
 func _enter() -> void:
 	super()
-	if character.velocity.x == 0:
+	direction = blackboard.get_var(BlackboardNames.direction_var)
+	if is_zero_approx(direction.x):
 		agent.animations.play("spotdodge")
 	elif character.is_on_floor():
 		agent.animations.play("dodge")
@@ -11,7 +13,6 @@ func _enter() -> void:
 	dash_fx()
 	blackboard.set_var(BlackboardNames.allow_dodge_var, false)
 	player_stats.dodge_cooldown_timer = player_stats.DODGE_COOLDOWN
-	var direction : Vector2 = blackboard.get_var(BlackboardNames.direction_var)
 	if not is_zero_approx(direction.x):
 		character.velocity.x = direction.x * player_stats.DODGE_SPEED
 	else:
@@ -34,16 +35,13 @@ func _ready() -> void:
 
 func dash_fx() -> void:
 	var dodge_fx: AnimatedSprite2D = $"../../../dodge_fx"
-	if is_zero_approx(character.velocity.x):
+	if is_zero_approx(direction.x):
 		return
-	
 	
 	if character.is_on_floor():
 		dodge_fx.play("dodge_fx")
 	else :
 		dodge_fx.play("airdodge_fx")
-	
-
 		
 	dodge_fx.global_position = character.global_position - Vector2(20, 20)
 	if character.velocity.x > 0:

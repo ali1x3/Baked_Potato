@@ -26,9 +26,23 @@ func _update(delta: float) -> void:
 func jump():
 	character.velocity.y = player_stats.jump_speed
 	print("jumped")
+	jump_fx()
+
+func jump_fx() -> void:
+	var jump_fx: AnimatedSprite2D = $"../../../jump_fx"
+	if character.is_on_floor():
+		jump_fx.play("jump_fx")
+	else:
+		jump_fx.play("airjump_fx")
+		
+	if character.velocity.x > 0:
+		jump_fx.transform.x = Vector2(1.0, 0.0)
+	elif character.velocity.x < 0:
+		jump_fx.transform.x = Vector2(-1.0, 0.0)
+	jump_fx.global_position = character.global_position - Vector2(0, 15)
 
 func apply_physics(delta: float):
-	if character.animations.animation in ["dodge", "airdodge"]:
+	if character.animations.animation in ["dodge", "airdodge", "spotdodge"]:
 		character.velocity.y = 0
 		return
 	if not character.is_on_floor():
