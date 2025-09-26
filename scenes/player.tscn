@@ -554,6 +554,7 @@ zoom = Vector2(1.5, 1.5)
 script = ExtResource("5_qlg0r")
 
 [node name="StateLabel" type="Label" parent="CharacterBody2D" node_paths=PackedStringArray("character", "limbo_hsm")]
+z_index = 12
 offset_left = -34.0
 offset_top = -103.0
 offset_right = 34.0
@@ -567,6 +568,7 @@ script = ExtResource("12_qfm1y")
 character = NodePath("..")
 
 [node name="animations" type="AnimatedSprite2D" parent="CharacterBody2D/facing"]
+z_index = 12
 position = Vector2(-1, -34)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"air"

@@ -2,9 +2,9 @@ class_name PlayerStats
 extends Resource
 
 # a bunch of information about the player thats needed to be tracked
-@export var run_speed : float = 300.0
-@export var max_air_speed : float = 180.0
-@export var air_acceleration : float = 100.0
+@export var run_speed : float = 200.0
+@export var max_air_speed : float = 120.0
+@export var air_acceleration : float = 70.0
 @export var jump_speed : float = -400.0
 const COYOTE_TIME : float = 0.15
 const BUFFER_TIME : float = 0.10
