@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgu7fp8tl5cw"]
+
+[ext_resource type="Script" uid="uid://b707qfgs6r8xy" path="res://scenes/curved_terrain.gd" id="1_6h8qp"]
+
+[sub_resource type="Curve2D" id="Curve2D_hqoh1"]
+
+[node name="curved_terrain" type="Path2D"]
+texture_filter = 1
+curve = SubResource("Curve2D_hqoh1")
+script = ExtResource("1_6h8qp")
