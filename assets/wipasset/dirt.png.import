@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://frhi7a7io2g5"
-path="res://.godot/imported/village1.png-e1803bfff7fb6705cfab64c2ee22c172.ctex"
+uid="uid://cc8l8xhwk5tn8"
+path="res://.godot/imported/dirt.png-563be3ad0fed1559e33554640e561489.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/wipasset/village1.png"
-dest_files=["res://.godot/imported/village1.png-e1803bfff7fb6705cfab64c2ee22c172.ctex"]
+source_file="res://assets/wipasset/dirt.png"
+dest_files=["res://.godot/imported/dirt.png-563be3ad0fed1559e33554640e561489.ctex"]
 
 [params]
 

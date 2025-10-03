@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://frhi7a7io2g5"
-path="res://.godot/imported/village1.png-e1803bfff7fb6705cfab64c2ee22c172.ctex"
+uid="uid://e4e4yhm3cee7"
+path="res://.godot/imported/fores bg 0.png-5fbce41b80854b45a3dc26592ca49de0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/wipasset/village1.png"
-dest_files=["res://.godot/imported/village1.png-e1803bfff7fb6705cfab64c2ee22c172.ctex"]
+source_file="res://assets/wipasset/fores bg 0.png"
+dest_files=["res://.godot/imported/fores bg 0.png-5fbce41b80854b45a3dc26592ca49de0.ctex"]
 
 [params]
 
