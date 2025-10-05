@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bj71uwxsyfohy"]
+[gd_scene load_steps=24 format=3 uid="uid://bj71uwxsyfohy"]
 
 [ext_resource type="Texture2D" uid="uid://sj6mig1imd47" path="res://assets/wipasset/haze.png" id="1_lcxmm"]
 [ext_resource type="Texture2D" uid="uid://frhi7a7io2g5" path="res://assets/wipasset/village1.png" id="2_6pax5"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c7sqvrchwxtdd" path="res://assets/wipasset/Tree3.png" id="7_trm4r"]
 [ext_resource type="Texture2D" uid="uid://bu63fm3flkjrc" path="res://assets/wipasset/Tree4.png" id="8_rxh07"]
 [ext_resource type="Texture2D" uid="uid://kxm8mreunl3c" path="res://assets/wipasset/platform 1.png" id="9_vhf3d"]
-[ext_resource type="PackedScene" uid="uid://crtbosayd0ido" path="res://scenes/player.tscn" id="10_6pax5"]
 [ext_resource type="Texture2D" uid="uid://bqimpam5680fi" path="res://assets/wipasset/platform 2.png" id="10_b7tcu"]
 [ext_resource type="Texture2D" uid="uid://dneuundnxqsa1" path="res://assets/wipasset/platform 3.png" id="11_rcemk"]
 [ext_resource type="Texture2D" uid="uid://bsnvq5altyiwr" path="res://assets/wipasset/platform 4.png" id="12_kchxs"]
@@ -85,9 +84,6 @@ texture = ExtResource("8_rxh07")
 z_index = 7
 position = Vector2(122, 127)
 texture = ExtResource("15_1kecn")
-
-[node name="player" parent="." instance=ExtResource("10_6pax5")]
-position = Vector2(774, 481.5)
 
 [node name="Platform 1" type="StaticBody2D" parent="."]
 
