@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqrqen6wgitws"]
+[gd_scene load_steps=7 format=3 uid="uid://bqrqen6wgitws"]
 
 [ext_resource type="PackedScene" uid="uid://crtbosayd0ido" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c3sn4nyt5gao2" path="res://assets/Pixel Art Platformer - Village Props v2.3.0/Texture/TX Tileset Ground.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bj71uwxsyfohy" path="res://scenes/Village.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://cxoyc6eee3lte" path="res://scenes/Forest Floor.tscn" id="4_lbhrr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -1342,3 +1343,6 @@ layer_0/tile_data = PackedInt32Array(65525, 851968, 6, 65526, 917504, 6, 65527, 
 
 [node name="Village" parent="." instance=ExtResource("3_lnu2h")]
 position = Vector2(-168, -799)
+
+[node name="ForestFloor" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(159, 238)

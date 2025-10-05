@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://cxoyc6eee3lte"]
 
-[ext_resource type="Script" uid="uid://b707qfgs6r8xy" path="res://scenes/curved_terrain.gd" id="1_0uwb1"]
-[ext_resource type="Texture2D" uid="uid://b3oaa65ofbp2v" path="res://assets/wipasset/grass.png" id="2_kgiq8"]
-[ext_resource type="Texture2D" uid="uid://ckc8dn47627ek" path="res://assets/wipasset/dirt.png" id="3_nl5id"]
-[ext_resource type="Texture2D" uid="uid://b0qhs3ghdbr6p" path="res://assets/wipasset/haze bg.png" id="4_ps34s"]
-[ext_resource type="Texture2D" uid="uid://dxicw5qnj3fow" path="res://assets/wipasset/Forest bg 1.png" id="5_e3m8d"]
-[ext_resource type="Texture2D" uid="uid://nt2ip4rja5fg" path="res://assets/wipasset/Forest bg 2.png" id="6_sn15a"]
-[ext_resource type="Texture2D" uid="uid://dnr0750ujaxrh" path="res://assets/wipasset/fores bg 0.png" id="7_hh5pe"]
+[ext_resource type="Script" path="res://scenes/curved_terrain.gd" id="1_0uwb1"]
+[ext_resource type="Texture2D" uid="uid://moqr3abrdlyc" path="res://assets/wipasset/grass.png" id="2_kgiq8"]
+[ext_resource type="Texture2D" uid="uid://cc8l8xhwk5tn8" path="res://assets/wipasset/dirt.png" id="3_nl5id"]
+[ext_resource type="Texture2D" uid="uid://crfmwo2eeaial" path="res://assets/wipasset/haze bg.png" id="4_ps34s"]
+[ext_resource type="Texture2D" uid="uid://cal61nqgbackg" path="res://assets/wipasset/Forest bg 1.png" id="5_e3m8d"]
+[ext_resource type="Texture2D" uid="uid://dhcu7xnjfpti0" path="res://assets/wipasset/Forest bg 2.png" id="6_sn15a"]
+[ext_resource type="Texture2D" uid="uid://e4e4yhm3cee7" path="res://assets/wipasset/fores bg 0.png" id="7_hh5pe"]
 
 [sub_resource type="Curve2D" id="Curve2D_0uwb1"]
 bake_interval = 49.81
@@ -21,15 +21,26 @@ point_count = 157
 position = Vector2(2510, 253)
 texture = ExtResource("4_ps34s")
 
-[node name="ForestBg1" type="Sprite2D" parent="."]
-position = Vector2(2506, 251)
-texture = ExtResource("5_e3m8d")
+[node name="Terrain" type="Node2D" parent="."]
+visible = false
 
-[node name="ForestBg2" type="Sprite2D" parent="."]
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 1)
+
+[node name="ForestBg2" type="Sprite2D" parent="Parallax2D3"]
 position = Vector2(2614, 251)
 texture = ExtResource("6_sn15a")
 
-[node name="ForesBg0" type="Sprite2D" parent="."]
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 1)
+
+[node name="ForestBg1" type="Sprite2D" parent="Parallax2D2"]
+position = Vector2(2506, 251)
+texture = ExtResource("5_e3m8d")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+
+[node name="ForesBg0" type="Sprite2D" parent="Parallax2D"]
 position = Vector2(2490, 249)
 texture = ExtResource("7_hh5pe")
 
@@ -41,7 +52,3 @@ script = ExtResource("1_0uwb1")
 edge_texture = ExtResource("2_kgiq8")
 inner_texture = ExtResource("3_nl5id")
 visible_collisions = false
-metadata/_custom_type_script = "uid://b707qfgs6r8xy"
-
-[node name="Terrain" type="Node2D" parent="."]
-visible = false
