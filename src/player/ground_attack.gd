@@ -9,6 +9,7 @@ var attack_sequence : int
 func _enter() -> void:
 	super()
 	attack_sequence = player_stats.attack_sequence
+	print("attack ", attack_sequence)
 	if attack_sequence == 1:
 		character.animation_player.play(attack_1)
 	elif attack_sequence == 2:
@@ -17,15 +18,17 @@ func _enter() -> void:
 		character.animation_player.play(attack_3)
 	attack_sequence = (attack_sequence % 3) + 1
 	player_stats.attack_sequence = attack_sequence
+	blackboard.set_var(BlackboardNames.allow_attack_var, false)
 	character.animation_player.animation_finished.connect(_on_animation_finished)
-	print("attack ", attack_sequence)
 	
 	
 func _exit() -> void:
 	character.animation_player.animation_finished.disconnect(_on_animation_finished)
 
 func _update(delta: float) -> void:
-	pass
+	character.velocity.x = 0
+	super(delta)
 
 func _on_animation_finished(animation : StringName):
 	dispatch("attack_finished")
+	blackboard.set_var(BlackboardNames.allow_attack_var, true)
