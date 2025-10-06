@@ -43,8 +43,6 @@ func dash_fx() -> void:
 	else :
 		dodge_fx.play("airdodge_fx")
 		
-
-	
 	if dodge_fx.transform.x == Vector2(1, 0):
 		dodge_fx.global_position = character.global_position - Vector2(28, 15)
 	else:

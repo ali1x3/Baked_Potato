@@ -8,7 +8,6 @@ extends Node
 var blackboard : Blackboard
 var input_direction : Vector2
 var jump : bool
-var jump_released : bool = true
 var dodge : bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -41,3 +40,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	elif event.is_action_released(player_actions.dodge):
 		dodge = false
+	
+	elif event.is_action_pressed(player_actions.attack):
+		blackboard.set_var(BlackboardNames.attack_var, true)
+	
+	elif event.is_action_released(player_actions.attack):
+		blackboard.set_var(BlackboardNames.attack_var, false)
+		

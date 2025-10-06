@@ -17,6 +17,7 @@ const DODGE_COOLDOWN : float = 0.6
 const DODGE_SPEED : float = 330.0
 @export var dodge_timer : float = 0.2
 @export var dodge_cooldown_timer : float = 0.0
+@export var attack_sequence : int = 1
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity_vector = Vector2(0.0, gravity)

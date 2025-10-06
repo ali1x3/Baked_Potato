@@ -6,7 +6,8 @@ func _enter() -> void:
 	player_stats.double_jumped = false
 	player_stats.jumped = false
 	blackboard.set_var(BlackboardNames.allow_jump_var, true)
-
+	blackboard.set_var(BlackboardNames.allow_attack_var, true)
+	
 func _update(delta: float) -> void:
 	super(delta)
 	if character.is_on_floor():
@@ -32,6 +33,14 @@ func _update(delta: float) -> void:
 			jump()
 			player_stats.jumped = true
 			blackboard.set_var(BlackboardNames.allow_jump_var, false)
+
+
+	if blackboard.get_var(BlackboardNames.attack_var) && blackboard.get_var(BlackboardNames.allow_attack_var, true):
+		if character.is_on_floor(): 
+			player_stats.jumped = true
+			blackboard.set_var(BlackboardNames.allow_jump_var, false)
+			dispatch("attack")
+
 
 
 func move() -> Vector2:

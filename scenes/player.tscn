@@ -63,6 +63,11 @@ var/attack/type = 1
 var/attack/value = false
 var/attack/hint = 0
 var/attack/hint_string = "character trynig to attack"
+var/allow_attack/name = &"allow_attack"
+var/allow_attack/type = 1
+var/allow_attack/value = false
+var/allow_attack/hint = 0
+var/allow_attack/hint_string = "character is allowed to attack"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2b1d"]
 atlas = ExtResource("13_qfm1y")
@@ -1463,9 +1468,9 @@ metadata/_custom_type_script = "uid://bjlnuurd587jy"
 
 [node name="GroundAttack" type="LimboState" parent="CharacterBody2D/LimboHSM"]
 script = ExtResource("7_i4ail")
-attack_2 = &"attack_string2"
-attack_3 = &"attack_string3"
-animation_name = &"attack_string1"
+attack_1 = &"attack_1"
+attack_2 = &"attack_2"
+attack_3 = &"attack_3"
 metadata/_custom_type_script = "uid://bjlnuurd587jy"
 
 [node name="PlayerInput" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("limbo_hsm")]
