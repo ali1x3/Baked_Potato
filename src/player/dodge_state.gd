@@ -5,11 +5,11 @@ func _enter() -> void:
 	super()
 	direction = blackboard.get_var(BlackboardNames.direction_var)
 	if is_zero_approx(direction.x):
-		agent.animations.play("spotdodge")
+		character.animation_player.play("spotdodge")
 	elif character.is_on_floor():
-		agent.animations.play("dodge")
+		character.animation_player.play("dodge")
 	else :
-		agent.animations.play("airdodge")
+		character.animation_player.play("airdodge")
 	dash_fx()
 	blackboard.set_var(BlackboardNames.allow_dodge_var, false)
 	player_stats.dodge_cooldown_timer = player_stats.DODGE_COOLDOWN
@@ -43,11 +43,9 @@ func dash_fx() -> void:
 	else :
 		dodge_fx.play("airdodge_fx")
 		
-	dodge_fx.global_position = character.global_position - Vector2(20, 20)
-	if character.velocity.x > 0:
-		dodge_fx.transform.x = Vector2(1.0, 0.0)
-		dodge_fx.global_position = character.global_position - Vector2(15, 15)
-	elif character.velocity.x < 0:
-		dodge_fx.transform.x = Vector2(-1.0, 0.0)
-		dodge_fx.global_position = character.global_position - Vector2(-15, 15)
-		
+
+	
+	if dodge_fx.transform.x == Vector2(1, 0):
+		dodge_fx.global_position = character.global_position - Vector2(28, 15)
+	else:
+		dodge_fx.global_position = character.global_position - Vector2(-28, 15)

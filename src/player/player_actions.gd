@@ -7,3 +7,4 @@ extends Resource
 @export var move_down: StringName = "move_down"
 @export var jump: StringName = "jump"
 @export var dodge: StringName = "dodge"
+@export var attack: StringName = "attack"

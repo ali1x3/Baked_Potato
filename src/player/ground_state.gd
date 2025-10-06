@@ -15,9 +15,9 @@ func _update(delta: float) -> void:
 	var velocity : Vector2 = move()
 	
 	if Vector2.ZERO.is_equal_approx(velocity):
-		agent.animations.play("idle")
+		character.animation_player.play("idle")
 	else:
-		agent.animations.play("run")
+		character.animation_player.play("run")
 	
 	if not character.is_on_floor():
 		dispatch("midair")

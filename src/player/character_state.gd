@@ -9,7 +9,7 @@ var player_stats : PlayerStats
 func _enter() -> void:
 	character = agent as CharacterBody2D
 	player_stats = character.player_stats
-	agent.animations.play(animation_name)
+	character.animation_player.play(animation_name)
 
 
 func _update(delta: float) -> void:
